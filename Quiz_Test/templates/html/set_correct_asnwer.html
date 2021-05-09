@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>آزمون</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+
+
+<body  >
+
+<div class="jumbotron text-center">
+  <!-- <h1>آزمون</h1> -->
+  <h4><p> لیست سوالات </p> <p>زمان آزمون {{time}} دقیقه </p></h4>
+</div>
+
+<form style='text-align-last: center;' action="{% url 'SAVE_QUIZ_ANSWER' %}" method="POST">
+
+    {%csrf_token%}
+    <input type="hidden" name="quiz_pk" value="{{pk}}">
+    <input type="hidden" name="{{type}}">
+    {%for number , answers in Answers.items %}
+
+    <label for="qustion{{number}}" style="margin-right: 25px;">{{number}} : </label>
+      <div class="form-check form-check-inline" id="question{{number}}" onmousedown="changeColor('question{{number}}')" >
+
+        {%for i in answers %}
+
+            <!-- <label class="form-check-label" for="inlineRadio">{{i}}</label> -->
+            <input class="form-check-input" type="radio"  id="inlineRadio" value=" {% cycle 1 2 3 4 %}" name="questoin-{{number}}" style="height:20px; width:20px; margin-right: 8px;margin-left: 8px;margin-top: 4px;" {% if i == 'True'%} checked {% endif%} > 
+
+          {%endfor%}
+
+      </div>
+      <br><hr>
+
+    {%endfor%}
+
+    <div class="col-auto">
+      <button type="submit" class="btn btn-primary" style="margin-bottom: 5%;">ارسال</button>
+    </div>
+
+</form>
+
+</body>
+
+</html>

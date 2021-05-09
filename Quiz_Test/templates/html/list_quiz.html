@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>لیست آزمون ها</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+
+
+<body  >
+
+<div class="jumbotron text-center">
+  <h1>سوالات چهار گزینه ای</h1>
+  <h4><p>فهرست فصل ها </p> </h4>
+</div>
+<center>
+{%for item in list_quiz%}
+<div class="card" style="width: 18rem;">
+  <div class="card-body">
+    <h5 class="card-title">{{item.title}}</h5>
+  </div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item">زمان آزمون :  {{item.time}} دقیقه </li>
+    <li class="list-group-item">شروع و پایان سوالات : {{item.start_qustion}} ~ {{item.end_qustion}}</li>
+    <li class="list-group-item">زمان ساخت آزمون : {{item.date_create}}</li>
+  </ul>
+  <div class="card-body">
+    <a href="{% url 'QUIZ' item.pk  %}" class="card-link"> [شروع]</a>
+    <a href="{% url 'ANSWER' item.pk  %}" class="card-link"> [تصحیح]</a>
+    <a href="{% url 'RESULT_QUIZ' item.pk  %}" class="card-link"> [نتیجه]</a>
+  </div>
+</div>
+<br>
+{%endfor%}
+</center>
+</body>
+
+</html>

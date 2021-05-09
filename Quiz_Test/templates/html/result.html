@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>نتیجه آزمون</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+
+
+<body  >
+
+<div class="jumbotron text-center">
+  <!-- <h1>آزمون</h1> -->
+  <h4>
+      <p> جواب سوالات</p> <p>تعداد جواب های صحیح : {{Correct}} </p>
+      <p>تعداد جواب های غلط : {{worng}}</p>
+      <p>تعداد جواب های داد نشده : {{total_none}}</p>
+
+      <div  class="form-check form-check-inline" id="question">
+          <label for="full-corrent" style="margin-right: 6px;">Best answer : </label>
+          <input class="form-check-input" type="checkbox" id="full-corrent" style=" outline:3px solid indigo; " value=""  checked >
+      </div>
+        <br>
+
+      <div  class="form-check form-check-inline" id="question">
+        <label for="corrent" style="margin-right: 6px;">Corrent : </label>
+        <input class="form-check-input" type="checkbox" id="corrent" style=" outline:3px solid green; " value=""  checked >
+      </div>
+        <br>
+
+      <div  class="form-check form-check-inline" id="question"></div>
+          <label for="worng" style="margin-right: 25px;" >Worng : </label>
+          <input class="form-check-input" type="checkbox" id="worng" style=" outline:3px solid red; " value=""  checked >
+      </div>
+</h4>
+</div>
+<center>
+    {%csrf_token%}
+    {% for number , answers in data.items%}
+    <div  class="form-check form-check-inline" id="question">
+        <h5><label style="margin-right: 12px; margin-top: 13px;" for="question">{{number}} : </label></h5>
+        {% for status in answers%}
+
+          {% if status == "True" %} 
+          <input class="form-check-input" type="checkbox" id="inlineCheckbox1" style=" outline:3px solid green;inline; height: 25px; width: 25px; " value="{{status}}"  checked >
+          {%endif%}
+
+          {% if status == "True/False" %} 
+          <input class="form-check-input" type="checkbox" id="inlineCheckbox1" style=" outline:3px solid indigo; height: 25px; width: 25px; " value="{{status}}"  checked >
+          {%endif%}
+
+          {% if status == "False" %} 
+          <input class="form-check-input" type="checkbox" id="inlineCheckbox1" style=" outline:3px solid red; height: 25px; width: 25px; " value="{{status}}" checked >
+          {%endif%}
+
+          {% if status == None %} 
+          <input class="form-check-input" type="checkbox" id="inlineCheckbox1" style="height: 25px; width: 25px; " value="{{status}}" >
+          {%endif%}
+
+          <!-- <label class="form-check-label" for="inlineCheckbox1">{{status}}</label> -->
+             
+        {%endfor%}
+    </div>
+    <br><hr>
+    {%endfor%}
+</center>
+</body>
+
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>برنامه آزمون من </title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+
+
+<body dir='ltr'>
+
+<div class="jumbotron text-center">
+  <h1>سوالات چهار گزینه ای</h1>
+  </h4><p>فهرست کتاب ها</p> </h4>
+</div>
+
+
+ <ul class="list-group">
+  {% for cat in category %}
+    <li class="list-group-item d-flex justify-content-between align-items-center" >
+      <a href="{% url "LIST_QUIZ" cat.title %}">{{cat.title}}</a>
+      <span class="badge badge-primary badge-pill">{{cat.detail_vote_set.count}}</span>
+    </li>
+  {%endfor%}
+</ul>
+
+
+
+</body>
+
+</html>

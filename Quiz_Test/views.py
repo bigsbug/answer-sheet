@@ -15,7 +15,8 @@ def Quiz(request,pk):
     template = 'html/quiz.html'
     data = Detail_Vote.objects.get(pk = pk)
     total = [i for i in range(data.start_qustion,data.end_qustion+1)]
-    context = {'range':total,'choices':[1,2,3,4],'pk':data.pk,'time':data.time,'type':'answer'}
+    choices = [i for i in range(1,data.type_choices+1)]
+    context = {'range':total,'choices':choices,'pk':data.pk,'time':data.time,'type':'answer'}
     return render(request,template,context)
 
 def Correct_Answers (request,pk):
@@ -24,8 +25,9 @@ def Correct_Answers (request,pk):
     data = Detail_Vote.objects.get(pk = pk)
     total = [i for i in range(data.start_qustion,data.end_qustion+1)]
     list_quiz = {}
+    type_choices = [i for i in range(1,data.type_choices+1)]
     for i in range(data.start_qustion,data.end_qustion+1):
-        choices = [1,2,3,4]
+        choices = type_choices.copy()
         try:
             
             choice = Correct_Answer.objects.get(vote = data , number = i)
@@ -38,11 +40,12 @@ def Correct_Answers (request,pk):
                 index =  (answer -1) ##index of answer equil :  number of answer - 1 
                 choices[index] = 'True' 
                 list_quiz[i] = choices
+              
 
         except  :
             list_quiz[i] = choices
 
-    context = {'Answers':list_quiz,'pk':data.pk,'time':data.time,'type':'correct_answer'}
+    context = {'Answers':list_quiz,'pk':data.pk,'time':data.time,'type':'correct_answer',}
     return render(request,template,context)
 
 def Save_quiz_answer(request):

@@ -116,7 +116,7 @@ def Result_quiz(request,pk):
             index =  (answer -1) ##index of answer equil :  number of answer - 1 
             if 'False' in choices:
                 index_False = choices.index('False')
-                print(index_False , index)
+                # print(index_False , index)
                 if index == index_False:
                     choices[index] = 'True/False'      
                 else:
@@ -143,10 +143,10 @@ def Result_quiz(request,pk):
                     total_worng +=1
             
 
-    for i , n in data.items():
-        print(i,n)
+    # for i , n in data.items():
+    #     print(i,n)
 
-    print(f'{total_Correct:} {total_worng:} {total_none:}')
+    # print(f'{total_Correct:} {total_worng:} {total_none:}')
 
     context = {"data":data,'worng':total_worng,'Correct':total_Correct,'total_none':total_none}
     return render(request,template,context)
